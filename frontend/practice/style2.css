@@ -1,0 +1,65 @@
+*{
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    grid-template-areas:
+    "header header"
+}
+
+header{
+    text-align: center;
+}
+
+th{
+    background-color: rgb(77, 2, 77);
+    color: white;
+}
+
+#QT{
+    background-color: yellow;
+}
+
+#BD{
+    background-color: cadetblue;
+}
+
+#BL{
+    background-color: chartreuse;
+}
+#FD{
+    background-color: rgb(78, 78, 141);
+}
+
+#FL{
+    background-color: burlywood;
+}
+
+#CC{
+    background-color: darkseagreen;
+}
+
+#IOT{
+    background-color: darkorange;
+}
+
+#CS:hover{
+    background-color:aquamarine;
+}
+
+#x:hover{
+    background-color: gray;
+}
+table:hover{
+background-color: aqua;
+}
+
+h1:hover{
+    background-color: coral;
+}
+
+
+

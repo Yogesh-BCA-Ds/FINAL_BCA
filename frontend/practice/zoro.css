@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 250px;
+    grid-template-rows: auto 1fr px;
+    grid-template-areas: 
+    "header header"
+    "footer footer"
+    "nav main"
+    "aside";
+}
