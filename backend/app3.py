@@ -1,7 +1,7 @@
-from flask import flask,jsonify,request
-from Flask_mysqldb import MySQL
+from flask import Flask,jsonify,request
+from flask_mysqldb import MySQL
 
-app=flask(__name__)
+app = Flask(__name__)
 app.config['MYSQL_HOST']='localhost'
 app.config['MYSQL_USER']='root'
 app.config['MYSQL_PASSWORD']=''
@@ -101,3 +101,6 @@ def insert_student():
     
 if __name__ =="__main__":
     app.run(debug=True)
+
+
+    ####
