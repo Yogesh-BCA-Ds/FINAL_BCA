@@ -1,0 +1,103 @@
+from flask import flask,jsonify,request
+from Flask_mysqldb import MySQL
+
+app=flask(__name__)
+app.config['MYSQL_HOST']='localhost'
+app.config['MYSQL_USER']='root'
+app.config['MYSQL_PASSWORD']=''
+app.config['MTSQL_DB']='flask_crud'
+
+mysql=MySQL(app)
+
+'''cur=mysql.connection.cursor()
+cur.excute("""
+CREATE TABLE IF NOT EXISTS students(
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+email VARCHAR(100) NOT NULL,
+phone VARCHAR(15) NOT NULL
+)
+""")
+mysql.connection.commit()
+cur.close()'''
+
+@app.route('/students',methods=['GET'])
+def get_students():
+    try:
+        cur=mysql.connection.cursor()
+        cur.execute("SELECT * FROM students")
+        students=cur.fetchall()
+        cur.close()
+        data=[]
+        for student in students:
+            data.append({
+                "id":student[0],
+                "name":student[1],
+                "email":student[2],
+                "phone":student[3]
+            })
+
+        return jsonify({
+            "success":True,
+            ":message":"students retrived successfully.",
+            "count":len(data),
+            "data":data
+        }),200
+    
+    except Exception as e:
+        return jsonify({
+            "status":"error",
+            "message":str(e)
+        }),500
+
+@app.route('/students',methods=['POST'])
+def insert_student():
+    try:
+        data=request.get_json()
+        if not data:
+            return jsonify({
+                "success":False,
+                "message":"request body is required."
+            }),400
+        
+        name=data.get("name")
+        email=data.get("email")
+        phone=data.get("phone")
+
+        if not name or not email or not phone:
+            return jsonify({
+                "success":False,
+                "message":"Name,email and phone are requried."
+            }),400
+        cur=mysql.connection.cursor()
+        cur.execute(
+            "INSERT INTO students(name,email,phone)VALUES(%s,%s,%s)",
+            (name,email,phone)
+        )
+        mysql.connection.commit()
+        student_id= cur.lastrowid
+        cur.execute ("SELECT * FROM students WHERE id=%s",(student_id))
+        student=cur.fetchone()
+        cur.close()
+        return jsonify(
+        {
+            "success":True,
+            "message":"student added successfully.",
+            "data":{
+                "id":student[0],
+                "name":student[1],
+                "email":student[2],
+                "phone":student[3]
+            }
+        }
+    ),201
+    except Exception as e:
+        mysql.connection.rollback()
+        print(str(e))
+        return jsonify({
+            "success":False,
+            "message":str(e)
+        }),500
+    
+if __name__ =="__main__":
+    app.run(debug=True)
