@@ -4,8 +4,8 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.config['MYSQL_HOST']='localhost'
 app.config['MYSQL_USER']='root'
-app.config['MYSQL_PASSWORD']=''
-app.config['MTSQL_DB']='flask_crud'
+app.config['MYSQL_PASSWORD']='system60'
+app.config['MYSQL_DB']='flask_crud'
 
 mysql=MySQL(app)
 
@@ -24,7 +24,7 @@ cur.close()'''
 @app.route('/students',methods=['GET'])
 def get_students():
     try:
-        cur=mysql.connection.cursor()
+        cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM students")
         students=cur.fetchall()
         cur.close()
@@ -74,9 +74,11 @@ def insert_student():
             "INSERT INTO students(name,email,phone)VALUES(%s,%s,%s)",
             (name,email,phone)
         )
+        
         mysql.connection.commit()
         student_id= cur.lastrowid
-        cur.execute ("SELECT * FROM students WHERE id=%s",(student_id))
+        print(type(student_id))
+        cur.execute ("SELECT * FROM students WHERE id=%s",(student_id,))
         student=cur.fetchone()
         cur.close()
         return jsonify(
@@ -101,6 +103,3 @@ def insert_student():
     
 if __name__ =="__main__":
     app.run(debug=True)
-
-
-    ####
