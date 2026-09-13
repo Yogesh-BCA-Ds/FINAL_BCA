@@ -1,16 +1,25 @@
 let num1;
 let num2;
 let flag = false;
+let op;
 function getValue(){
     let a;
     let b;
-    let op;
     let sum;
-    if (event.target.value != "+"|"-"|"/"|"*"|"%" && flag==false){
+    if (event.target.value != "+"||
+        event.target.value != "-"||
+        event.target.value != "/"||
+        event.target.value != "*"||
+        event.target.value != "%"
+         && flag==false){
         a = document.getElementById("i").value=document.getElementById("i").value+event.target.value;
         num1 = Number(a);
         }
-    else if (event.target.value == "+"|"-"|"/"|"*"|"%"){
+    else if (event.target.value != value="+"||
+        event.target.value != "-"||
+        event.target.value != "/"||
+        event.target.value != "*"||
+        event.target.value != "%"){
         flag = true;
         op = event.target.value;
         document.getElementById("i").value = "";
