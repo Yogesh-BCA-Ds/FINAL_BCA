@@ -6,29 +6,35 @@ function getValue(){
     let a;
     let b;
     let sum;
-    if (event.target.value != "+"||
-        event.target.value != "-"||
-        event.target.value != "/"||
-        event.target.value != "*"||
-        event.target.value != "%"
-         && flag==false){
+    if (event.target.value != "+"&&
+        event.target.value != "-"&&
+        event.target.value != "/"&&
+        event.target.value != "*"&&
+        event.target.value != "%"&& flag == false){
         a = document.getElementById("i").value=document.getElementById("i").value+event.target.value;
         num1 = Number(a);
+        console.log(flag);
         }
-    else if (event.target.value != value="+"||
+    else if (event.target.value != "+"||
         event.target.value != "-"||
         event.target.value != "/"||
         event.target.value != "*"||
         event.target.value != "%"){
         flag = true;
+        console.log(flag);
         op = event.target.value;
         document.getElementById("i").value = "";
         }
-    else if (event.target.value != "=" && flag == true)
+    else if (event.target.value != "+"||
+        event.target.value != "-"||
+        event.target.value != "/"||
+        event.target.value != "*"||
+        event.target.value != "%"||
+        event.target.value != "clear" && flag == true)
     {
         b = document.getElementById("i").value = document.getElementById("i").value+event.target.value;
         num2 = Number(b);
-        
+        console.log(flag);
     }
     else if (event.target.value == "=" && op=="+"){
         sum = num1+num2;
