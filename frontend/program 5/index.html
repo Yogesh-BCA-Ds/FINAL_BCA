@@ -1,25 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>registration form</title>
-
-    <style>
-        body{
-            font-family:Arial;
-            background-color: #eee;
-        }
-
-        form{
-            width: 300px;
-            margin: 40px auto;
-            padding: 20px;
-            background: white;
-        }
-    </style>
+<title>Registration</title>
+<style>
+body{font-family:Arial;background:#eee}
+form{background:white;width:300px;margin:50px auto;padding:20px;border-radius:10px}
+input,select,button{width:100%;padding:10px;margin:7px 0}
+button{background:blue;color:white;border:0}
+</style>
 </head>
+
 <body>
-    
+<form onsubmit="return login()">
+<h2>Registration</h2>
+
+<input id="name" placeholder="Full Name" required>
+
+<label>Gender:</label>
+<input type="radio" name="gender" value="Male" required> Male
+<input type="radio" name="gender" value="Female"> Female
+
+<input type="email" id="email" placeholder="Email" required>
+<input type="password" id="pass" placeholder="Password" required>
+
+<select id="course" required>
+<option value="">Select Course</option>
+<option>HTML</option>
+<option>CSS</option>
+<option>JavaScript</option>
+<option>Python</option>
+</select>
+
+<button>Submit</button>
+<p id="msg"></p>
+</form>
+
+<script>
+function login(){
+  if(document.getElementById("pass").value.length<6){
+    msg.innerHTML="Password must be 6+ characters";
+    return false;
+  }
+  msg.innerHTML="Registration Successful!";
+  return false;
+}
+</script>
 </body>
 </html>

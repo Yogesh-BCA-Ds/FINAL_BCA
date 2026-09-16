@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial;background:linear-gradient(135deg,#667eea,#764ba2);
+ min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px
+}
+form{
+ background:white;width:100%;max-width:400px;padding:25px;
+ border-radius:12px;box-shadow:0 8px 25px #0003
+}
+h2{text-align:center}
+input,select,button{
+ width:100%;padding:11px;margin:7px 0;border:1px solid #ccc;border-radius:6px
+}
+.gender input,.terms input{width:auto;margin-right:5px}
+.gender,.terms{margin:10px 0}
+button{background:#667eea;color:white;border:0;cursor:pointer}
+button:hover{background:#5568d8}
+#msg{text-align:center}
+</style>
+</head>
+
+<body>
+
+<form onsubmit="return register()">
+<h2>Registration</h2>
+
+<input id="name" placeholder="Full Name" required>
+
+<div class="gender">
+<b>Gender:</b>
+<input type="radio" name="gender" required> Male
+<input type="radio" name="gender"> Female
+</div>
+
+<input type="email" placeholder="Email" required>
+<input type="password" id="pass" placeholder="Password" required>
+
+<select required>
+<option value="">Select Course</option>
+<option>HTML</option>
+<option>CSS</option>
+<option>JavaScript</option>
+<option>Python</option>
+</select>
+
+<div class="terms">
+<input type="checkbox" id="terms">
+I agree to the Terms & Conditions
+</div>
+
+<button>Register</button>
+<p id="msg"></p>
+</form>
+
+<script>
+function register(){
+ let p=document.getElementById("pass").value;
+ if(p.length<6)msg.innerHTML="Password must be 6+ characters";
+ else if(!terms.checked)msg.innerHTML="Please accept Terms & Conditions";
+ else msg.innerHTML="Registration Successful!";
+ return false;
+}
+</script>
+
+</body>
+</html>

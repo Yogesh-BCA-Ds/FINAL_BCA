@@ -1,0 +1,11 @@
+nav{display: flex;
+   flex-direction: rows;
+   gap:20px
+}
+
+
+#a{
+    border: 10px solid #ccc;
+    padding: 60px;
+    border-radius: 90px;
+}
