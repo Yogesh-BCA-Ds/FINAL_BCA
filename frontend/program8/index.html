@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cartoon Gallery</title>
+</head>
+
+<body>
+
+    <h1>Cartoon Gallery</h1>
+
+    <button onclick="loadCartoons()">Load Cartoons</button>
+
+    <p id="message">
+        Click the button to load the cartoons...
+    </p>
+
+    <div id="cartoons"></div>
+
+    <script>
+
+        function loadCartoons() {
+
+            let message = document.querySelector("#message");
+            let cartoons = document.querySelector("#cartoons");
+
+            message.textContent = "Loading cartoons...";
+            cartoons.innerHTML = "";
+
+            // Replace this with your GitHub RAW JSON URL
+            fetch("https://raw.githubusercontent.com/USERNAME/REPOSITORY/main/cartoons.json")
+
+                .then(response => {
+
+                    if (!response.ok) {
+                        throw new Error("Failed to load cartoon data");
+                    }
+
+                    return response.json();
+                })
+
+                .then(data => {
+
+                    data.movies.forEach(cartoon => {
+
+                        let div = document.createElement("div");
+
+                        div.innerHTML = `
+                            <h2>${cartoon.title}</h2>
+                            <img src="${cartoon.image}" width="200">
+                            <p>${cartoon.description}</p>
+                        `;
+
+                        cartoons.appendChild(div);
+                    });
+
+                    message.textContent = "Cartoons loaded!";
+
+                })
+
+                .catch(error => {
+
+                    message.textContent =
+                        "Error loading cartoons.";
+
+                    console.error(error);
+
+                });
+        }
+
+    </script>
+
+</body>
